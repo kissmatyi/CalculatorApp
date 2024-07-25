@@ -1,0 +1,50 @@
+.answer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.answer input {
+  height: 60px;
+  width: 400px;
+  font-size: 50px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.keypad {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-spacing: 10px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.keypad td {
+  text-align: center;
+  align-items: center;
+  font-size: 40px;
+  height: 60px;
+  width: 60px;
+  box-shadow: 1px 5px 3px 1px;
+  border-radius: 5px 5px 5px 5px;
+  border: 2px black solid;
+}
+
+.keypad td:hover {
+  font-size: 50px;
+  height: 60px;
+  width: 60px;
+  box-shadow: 0 0 0 0;
+  background-color: red;
+  border: 2px grey solid;
+  cursor: pointer;
+}
