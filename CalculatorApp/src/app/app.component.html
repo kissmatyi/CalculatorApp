@@ -4,49 +4,40 @@
   </section>
   <section class="main">
     <div class="answer">
-      <input
-        type="text"
-        name="answer"
-        readonly="true"
-        disabled="true"
-        class="answerinput"
-      />
+      <p class="answerinput">{{ answer }}</p>
     </div>
     <div class="answer">
-      <input
-        type="text"
-        name="answer"
-        readonly="true"
-        disabled="true"
-        class="equationoutput"
-      />
+      <p class="answerinput">{{ equationoutput }}</p>
     </div>
     <div class="keypad">
       <table>
         <tbody>
           <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>+</td>
+            <td (click)="addChar('1')">1</td>
+            <td (click)="addChar('2')">2</td>
+            <td (click)="addChar('3')">3</td>
+            <td (click)="addChar('+')">+</td>
           </tr>
           <tr>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>-</td>
+            <td (click)="addChar('4')">4</td>
+            <td (click)="addChar('5')">5</td>
+            <td (click)="addChar('6')">6</td>
+            <td (click)="addChar('-')">-</td>
           </tr>
           <tr>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>*</td>
+            <td (click)="addChar('7')">7</td>
+            <td (click)="addChar('8')">8</td>
+            <td (click)="addChar('9')">9</td>
+            <td (click)="addChar('*')">*</td>
           </tr>
           <tr>
-            <td>+/-</td>
-            <td>0</td>
-            <td>=</td>
-            <td>/</td>
+            <td (click)="clearInput()">C</td>
+            <td (click)="addChar('0')">0</td>
+            <td (click)="calculateAnswer()">=</td>
+            <td (click)="addChar('/')">/</td>
+          </tr>
+          <tr>
+            <td (click)="clearLast()">{{ deleteIcon }}</td>
           </tr>
         </tbody>
       </table>
