@@ -1,46 +1,65 @@
 <router-outlet>
-  <section>
-    <h1>Basic calculator app</h1>
-  </section>
-  <section class="main">
-    <div class="answer">
-      <p class="answerinput">{{ answer }}</p>
-    </div>
-    <div class="answer">
-      <p class="answerinput">{{ equationoutput }}</p>
-    </div>
-    <div class="keypad">
-      <table>
-        <tbody>
-          <tr>
-            <td (click)="addChar('1')">1</td>
-            <td (click)="addChar('2')">2</td>
-            <td (click)="addChar('3')">3</td>
-            <td (click)="addChar('+')">+</td>
-          </tr>
-          <tr>
-            <td (click)="addChar('4')">4</td>
-            <td (click)="addChar('5')">5</td>
-            <td (click)="addChar('6')">6</td>
-            <td (click)="addChar('-')">-</td>
-          </tr>
-          <tr>
-            <td (click)="addChar('7')">7</td>
-            <td (click)="addChar('8')">8</td>
-            <td (click)="addChar('9')">9</td>
-            <td (click)="addChar('*')">*</td>
-          </tr>
-          <tr>
-            <td (click)="clearInput()">C</td>
-            <td (click)="addChar('0')">0</td>
-            <td (click)="calculateAnswer()">=</td>
-            <td (click)="addChar('/')">/</td>
-          </tr>
-          <tr>
-            <td (click)="clearLast()">{{ deleteIcon }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <section class="outlet">
+    <section class="header">
+      <h1>Basic calculator app</h1>
+    </section>
+    <section class="main">
+      <div class="answer">
+        <p class="answerinput">{{ answer }}</p>
+      </div>
+      <div class="answer">
+        <p class="answerinput">{{ equationoutput }}</p>
+      </div>
+      <div class="keypad">
+        <table>
+          <tbody>
+            <tr>
+              <td (click)="addChar('1')">1</td>
+              <td (click)="addChar('2')">2</td>
+              <td (click)="addChar('3')">3</td>
+              <td (click)="addChar('+')">+</td>
+            </tr>
+            <tr>
+              <td (click)="addChar('4')">4</td>
+              <td (click)="addChar('5')">5</td>
+              <td (click)="addChar('6')">6</td>
+              <td (click)="addChar('-')">-</td>
+            </tr>
+            <tr>
+              <td (click)="addChar('7')">7</td>
+              <td (click)="addChar('8')">8</td>
+              <td (click)="addChar('9')">9</td>
+              <td (click)="addChar('*')">*</td>
+            </tr>
+            <tr>
+              <td (click)="clearInput()">C</td>
+              <td (click)="addChar('0')">0</td>
+              <td (click)="calculateAnswer()">=</td>
+              <td (click)="addChar('/')">/</td>
+            </tr>
+            <tr>
+              <td (click)="clearLast()">{{ deleteIcon }}</td>
+              <td (click)="addChar('.')">.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="history">
+      <h2>Earlier calculations</h2>
+    </section>
+    <section>
+      <div class="listOfCalc" *ngFor="let item of history">
+        <div class="elemOfHist">
+          <p class="historyItems" (click)="addToEq(item.equation)">
+            {{ item.equation }}
+          </p>
+          <p class="upTextalign" *ngIf="item.equation != ''">=</p>
+          <p class="historyItems" (click)="addToEq(item.answer)">
+            {{ item.answer }}
+          </p>
+        </div>
+      </div>
+    </section>
   </section>
 </router-outlet>

@@ -1,15 +1,69 @@
+.outlet {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  overflow: hidden;
+  grid-template-rows: 1fr 6fr;
+  column-gap: 150px;
+  max-width: 880px;
+}
+
+.elemOfHist {
+  text-align: right;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 2fr;
+  word-wrap: break-word;
+}
+
+.upTextalign {
+  margin: 0;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.history {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: right;
+}
+
+.listOfCalc {
+  text-align: right;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.historyItems {
+  text-align: right;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.historyItems:hover {
+  font-size: 20px;
+  color: darkblue;
+}
+
+.header {
+  text-align: center;
+  width: 500px;
+  height: min-content;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
 .answer {
   display: flex;
   justify-content: center;
 }
 
-.answer input {
-  height: 60px;
-  width: 400px;
-  font-size: 50px;
-}
-
 .answer p {
+  margin: 10px;
   height: 60px;
   width: 400px;
   font-size: 50px;

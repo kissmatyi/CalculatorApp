@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { stringify } from 'node:querystring';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -17,17 +17,27 @@ export class AppComponent {
   functionArray: Array<string> = ['+', '-', '*', '/'];
   equation: Array<string> = ['', '', ''];
   answer: string = '';
+  history: { equation: string; answer: string }[] = [
+    { equation: '', answer: '' },
+  ];
 
   //TODO: make multiple operators available
-  //TODO: make floating values available
-  //TODO: make history tab to see earlier calculations
 
   public addChar(char: string): void {
-    this.equationoutput = this.equationoutput.concat(char);
+    if (this.equationoutput.length == 11) {
+      alert('Maximum computing reached');
+    } else {
+      this.equationoutput = this.equationoutput.concat(char);
+    }
   }
 
   public clearInput(): void {
     this.equationoutput = '';
+  }
+
+  public addToEq(item: string): void {
+    this.clearInput();
+    this.equationoutput = this.equationoutput.concat(item);
   }
 
   public clearLast(): void {
@@ -38,9 +48,9 @@ export class AppComponent {
   }
 
   public calculateAnswer(): void {
-    console.log(this.equationoutput);
     let operator: string = '';
     let opPlace: number = 0;
+    let isFloating: boolean = false;
     for (let i = 0; i < this.equationoutput.length; i++) {
       for (let j = 0; j < this.functionArray.length; j++) {
         if (this.equationoutput[i] === this.functionArray[j]) {
@@ -48,8 +58,11 @@ export class AppComponent {
           opPlace = i;
         }
       }
+      if (this.equationoutput[i] === '.') {
+        isFloating = true;
+      }
     }
-    console.log(opPlace);
+
     this.equation[0] = this.equationoutput.slice(0, opPlace);
     this.equation[1] = this.equationoutput.charAt(opPlace);
     this.equation[2] = this.equationoutput.slice(
@@ -58,14 +71,32 @@ export class AppComponent {
     );
     console.log(this.equation);
 
-    this.answer = this.compute(
-      parseInt(this.equation[0]),
-      this.equation[1],
-      parseInt(this.equation[2])
-    ).toString();
+    if (isFloating) {
+      this.answer = this.compute(
+        parseFloat(this.equation[0]),
+        this.equation[1],
+        parseFloat(this.equation[2])
+      )
+        .toFixed(2)
+        .toString();
+    } else {
+      this.answer = this.compute(
+        parseInt(this.equation[0]),
+        this.equation[1],
+        parseInt(this.equation[2])
+      ).toString();
+    }
+
+    this.history.push({ equation: this.equationoutput, answer: this.answer });
+
+    if (opPlace === 0 || opPlace === this.equationoutput.length - 1) {
+      this.answer = 'Syntax error';
+      this.history.pop();
+    }
   }
 
   public compute(var1: number, operator: string, var2: number): number {
+    console.log(var1, var2);
     let answer: number = 0;
     switch (operator) {
       case '+':
