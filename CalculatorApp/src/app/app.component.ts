@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,19 @@ export class AppComponent {
   title = 'CalculatorApp';
   equationoutput: string = '';
   deleteIcon: string = '<-';
-  functionArray: Array<string> = ['+', '-', '*', '/'];
+  functionArray: Array<string> = ['+', '-', '*', '/', '='];
   equation: Array<string> = ['', '', ''];
   answer: string = '';
   history: { equation: string; answer: string }[] = [
     { equation: '', answer: '' },
   ];
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (Number(event.key) || this.functionArray.includes(event.key)) {
+      this.addChar(event.key);
+    }
+  }
 
   //TODO: make multiple operators available
 
